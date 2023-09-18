@@ -1,0 +1,17 @@
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+    apt:
+      name:
+        - netcat
+        - neofetch
+        - tree
+        - sl
+        - cmatrix
+      autoremove: yes
+      purge: yes
+      state: absent

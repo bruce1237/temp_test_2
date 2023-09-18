@@ -1,0 +1,36 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+  
+  - name: update repo
+    package:
+      update_cache: yes
+
+- hosts: group_a
+  become: true
+  tasks:
+    
+  - name: install unzip
+    package:
+      name: unzip
+      state: latest
+  
+  - name: copy file from git to server(group_a)
+    unarchive:
+      src: https://github.com/bruce1237/smarsh/archive/refs/heads/main.zip
+      dest: /var/www/php
+      remote_src: yes
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: copy file from local
+    copy:
+      src: ../files/testCopy.txt
+      dest: /var/www/test/copyTest.a
+      owner: root
+      group: root
+      mode: 0644
+
+    

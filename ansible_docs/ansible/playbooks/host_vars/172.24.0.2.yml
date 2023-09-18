@@ -1,0 +1,10 @@
+file_src: testFile.txt
+file_dest: /var/www/abc.txt
+file_owner: root
+file_group: root
+file_mode: 0755
+train_package: neofetch
+
+# for the j2 templates
+ssh_users: "root simone"
+ssh_template_file: sshd_config_ubuntu.j2

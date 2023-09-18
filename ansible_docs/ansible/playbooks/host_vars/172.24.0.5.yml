@@ -1,0 +1,8 @@
+tree_package: tree
+neofetch_package: neofetch
+train_package: sl
+
+# for the j2 templates
+ssh_users: "root simone"
+# for the j2 templates
+ssh_template_file: sshd_config_ubuntu.j2

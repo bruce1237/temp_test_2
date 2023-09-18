@@ -1,0 +1,18 @@
+- name: copy a file to groupA
+  copy:
+   src: "{{ file_src }}"
+   dest: "{{ file_dest }}"
+   owner: "{{ file_owner }}"
+   group: "{{ file_group }}"
+   mode: "{{ file_mode }}"
+  notify: file_has_been_changed
+
+- name: generate sshd_config file from template
+  tags: ssh
+  template:
+    src: "{{ ssh_template_file }}"
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_my_sshd  

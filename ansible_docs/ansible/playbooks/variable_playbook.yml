@@ -1,0 +1,12 @@
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repo and install neofetch, tree packages
+    package:
+      update_cache: yes
+      name:
+        - "{{ neofetch_pk }}"
+        - "{{ tree_pk }}"
+      state: latest
+    when: ansible_distribution == "Ubuntu"

@@ -1,0 +1,5 @@
+- name: install tree to groupB
+  package:
+   name: tree
+   state: latest
+  

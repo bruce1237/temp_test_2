@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+  
+  - name: update repo
+    package:
+      update_cache: yes
+
+- hosts: group_a
+  become: true
+  tasks:
+    
+  - name: install httpd
+    tags: centos, httpd
+    package:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  
+  - name: start httpd service(CentOS)
+    service:
+      name: httpd
+      state: started # = service httpd start
+      enabled: yes #start httpd service at start up
+    when: ansible_distribution == "CentOS"
+
+  - name: change e-mail address for admin, this requires service reboot
+    tags: change_email
+    lineinfile: # this lineinfile module allows to change a line in a file
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin somebody@somewhere.net #rewrite the line according to the regexp
+    when: ansible_distribution == "CentOS"
+    register: variableOfChangeStatus #this just a variable name, 
+
+  - name: reboot httpd service
+    tags: apache
+    service:
+      name: httpd
+      state: restarted
+    when: variableOfChangeStatus.changed #check if the variable changed, 
+    # beware of the variable can not be used in the following way,
+    # play1 register: variableA
+    # play2 register: variableA
+    # play3 when variableA.changed
+    # if the paly1 run, then the variableA changed, 
+    # play2 ran, didn't change, the variableA stay unchanged,
+    # when come to play3, the paly3 will NOT run as the variableA is not changed.ßß
+    

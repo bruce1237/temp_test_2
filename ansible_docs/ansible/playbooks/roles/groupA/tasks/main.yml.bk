@@ -1,0 +1,7 @@
+- name: copy a file to groupA
+  copy:
+   src: testFile.txt
+   dest: /var/file_in_test.txt
+   owner: root
+   group: root
+   mode: 0755

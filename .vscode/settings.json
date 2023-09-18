@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/ansible/schemas/main/f/ansible.json#/$defs/tasks": "file:///Users/bosun/Codes/myAnsible/ansible_docs/ansible/ansible-pull/tasks/packages.yml"
+    }
+}

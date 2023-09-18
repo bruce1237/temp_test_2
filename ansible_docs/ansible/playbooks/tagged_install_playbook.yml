@@ -1,0 +1,42 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update repository index
+    tags: always
+    apt:
+      update_cache: yes
+
+- hosts: group_a
+  become: true
+  tasks:
+    
+  - name: install tree
+    tags: tree, cmatrix, test_a
+    package:
+      name:
+        - tree
+        - cmatrix
+      state: latest
+
+- hosts: group_b
+  become: true
+  tasks:
+  - name: install neofetch
+    tags: neofetch, test_a
+    package:
+      name:
+        - neofetch
+        - cmatrix
+      state: latest
+
+- hosts: group_c
+  become: true
+  tasks:
+  - name: install sl
+    tags: sl, test_a
+    package: 
+      name: sl
+      state: latest

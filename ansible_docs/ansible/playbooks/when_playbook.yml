@@ -1,0 +1,20 @@
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+    apt:
+      name:
+        - netcat
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+    apt:
+      name:
+        - neofetch
+      state: latest
+    when: ansible_distribution == "Ubuntu"

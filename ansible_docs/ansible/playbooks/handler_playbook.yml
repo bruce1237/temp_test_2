@@ -1,0 +1,39 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+  
+  - name: update repo
+    package:
+      update_cache: yes
+
+- hosts: group_a
+  become: true
+  tasks:
+    
+  - name: try to invoke handler
+    tags: handler, invoke
+    lineinfile:
+      path: /var/www/abc.txt
+      regexp: 'test'
+      line: reaaallll file for invoke hanlder
+    notify: file_has_been_changed
+
+
+  
+  # linux TV example
+  # - name: start httpd service(CentOS)
+  #   service:
+  #     name: httpd
+  #     state: started # = service httpd start
+  #     enabled: yes #start httpd service at start up
+  #   when: ansible_distribution == "CentOS"
+
+  # - name: change e-mail address for admin, this requires service reboot
+  #   tags: change_email
+  #   lineinfile: # this lineinfile module allows to change a line in a file
+  #     path: /etc/httpd/conf/httpd.conf
+  #     regexp: '^ServerAdmin'
+  #     line: ServerAdmin somebody@somewhere.net #rewrite the line according to the regexp
+  #   when: ansible_distribution == "CentOS"
+  #   notify: restart_my_apache_service

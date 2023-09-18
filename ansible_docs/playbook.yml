@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+
+  - name: remove  nano, netcat package
+    apt:
+      name:
+        - nano
+        - netcat
+      state: absent
+
+  - name: remove php package
+    apt:
+      name: php
+      state: absent

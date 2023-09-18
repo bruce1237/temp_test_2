@@ -1,0 +1,9 @@
+- name: file_has_been_changed
+  package:
+   name: "{{ train_package }}"
+   state: latest
+
+- name: restart_my_sshd
+  service:
+   name: sshd
+   state: restarted

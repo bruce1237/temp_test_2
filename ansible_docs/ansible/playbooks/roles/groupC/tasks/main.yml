@@ -1,0 +1,7 @@
+- name: install sl in groupC
+  package: 
+   name: 
+    - "{{ train_package }}"
+    - "{{ tree_package }}"
+    - "{{ neofetch_package }}"
+   state: latest

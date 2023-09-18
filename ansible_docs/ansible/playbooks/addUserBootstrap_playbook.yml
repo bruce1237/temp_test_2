@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+  
+  - name: update repo
+    package:
+      update_cache: yes
+    changed_when: false # not a change no matter what
+
+- hosts: group_a
+  become: true
+  tasks:
+    
+  # - name: create user "simone"
+  #   tags: always
+  #   user:
+  #     name: simone
+  #     groups: root
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDL0btH60yKhv8AvNHbUgCJUeBIvAS+lpPbGeh7lCSZ5P7iEwYYFeonIQjkwVH4eJ5cROR3R1yx+OEID+QZRxafXp5gLnO4+kRwe3IcaT/EltZF0/Cd/2J8BxaliSus9CNKBAk7D5n2TihoCB4UfkstCOM5tephwrfcwkklzTdN4n3sb/PCJvixAqGviVYd0wd6O96aPg76Rb+xjJ+WUSG16RqYBStJnxI9oRSpUthxbRgwlRuu3BTWPXjv+7zF8ntTCXTrG1EkRE0iOXNtHwg9CSYZuEJsU7vJBE62MsE9ndf2FY7ouSkGAtNZhmU129LIc4i2is2Dw+EAdlT4sfXTcC8EniYDb5ztzwzz4YKzBRApFQVWd5VKZ8ACpaUbIPZLwlKY/Z3nkMXzX7KBMdV3sNsRzGbuhHiO3qWVMsZF+dMouvxxCPuY5L6Ws3OSWvbxcDxCra3uZeSAETj1xqmUPe+DdetEHrsQTfOyUhzOGK8R0bmF7Sado8Q7yFPFhJ0= root@711c409bfa3f"
+
+  # - name: add sudoers file for simone
+  #   tags: always
+  #   copy:
+  #     src: ../files/sudoer_simone
+  #     dest: /etc/sudoers.d/simone
+  #     owner: root
+  #     group: root
+  #     mode: 0440
+  

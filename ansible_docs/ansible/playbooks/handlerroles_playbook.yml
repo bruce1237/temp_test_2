@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+  
+  - name: update repo
+    package:
+      update_cache: yes
+    changed_when: false
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+- hosts: group_a
+  become: true
+  roles:
+    - groupA

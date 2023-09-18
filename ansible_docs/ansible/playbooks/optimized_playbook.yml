@@ -1,0 +1,12 @@
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+      name:
+        - neofetch
+        - tree
+      state: latest
+    when: ansible_distribution == "Ubuntu"

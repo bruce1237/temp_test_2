@@ -1,0 +1,31 @@
+services:
+  master: 
+    container_name: ansible-master 
+    build: master
+    user: root
+    stdin_open: true # docker run -i keep the container running
+    tty: true 
+    volumes:
+      - "./ansible_docs/ansible:/ansible"
+
+  slave_a:
+    container_name: ansible-slave-a
+    build: slave
+
+  slave_b:
+    container_name: ansible-slave-b
+    build: slave
+  
+  slave_c:
+    container_name: ansible-slave-c
+    build: slave
+
+  # slave_d:
+  #   container_name: ansible-slave-d-centos
+  #   build: slave_centos
+
+  ubuntu:
+   container_name: ubuntu-test
+   image: centos:7
+   stdin_open: true
+   tty: true
